@@ -1,0 +1,74 @@
+# LLM Configuration
+# Using the AWQ-quantized variant: ~4-5 GiB weights vs ~15 GiB for bfloat16.
+# This fits comfortably on a 16 GiB GPU (RTX 5070 Ti) with KV-cache headroom.
+llm:
+  agent_model: "Qwen/Qwen3-8B-AWQ"
+  blamer_model: "Qwen/Qwen3-8B-AWQ"
+  mutator_model: "Qwen/Qwen3-8B-AWQ"
+  base_url: "http://localhost:8000/v1"
+  api_key: "dummy"
+  # Agent modules run without extended thinking (speed + token economy)
+  agent_thinking: false
+  # Blamer/Mutator benefit from extended reasoning
+  blamer_thinking: true
+  mutator_thinking: true
+  max_tokens: 2048
+  temperature: 0.7
+  # Fallback to OpenAI API if local inference quality is insufficient
+  # Set OPENAI_API_KEY env var to enable
+  fallback_model: null  # e.g. "gpt-4.1"
+
+# EVOTOOL Hyperparameters (from Appendix A.6)
+evotool:
+  max_generations: 8       # G
+  mini_batch_size: 3       # B
+  initial_population_size: 1
+  max_steps_per_episode: 30
+
+# Data Splits (seed=42 for reproducibility)
+data_splits:
+  tau_bench_retail:
+    train_size: 100
+    sel_size: 50
+    seed: 42
+    train_split: "train"   # retail has train/dev/test splits
+    test_split: "test"
+  tau_bench_airline:
+    train_size: 200
+    sel_size: 100
+    seed: 42
+    train_split: "test"    # airline only has test split; we carve out train/sel
+    test_split: "test"
+    test_offset: 300       # use indices [300:] for final evaluation
+  bfcl_single:
+    train_size: 200
+    sel_size: 100
+    seed: 42
+    categories:
+      - "simple_python"
+      - "multiple"
+      - "parallel"
+      - "parallel_multiple"
+  bfcl_multi:
+    train_size: 100
+    sel_size: 50
+    seed: 42
+    categories:
+      - "multi_turn_base"
+
+# τ-Bench Configuration
+tau_bench:
+  user_strategy: "llm"
+  user_model: "Qwen/Qwen3-8B-AWQ"
+  user_provider: "openai"
+  # vLLM server will be used for the user simulator via OPENAI_BASE_URL env var
+
+# BFCL Configuration
+bfcl:
+  project_root: "experiments/bfcl"
+  result_dir: "experiments/bfcl/result"
+
+# Paths
+paths:
+  results_dir: "experiments/results"
+  logs_dir: "experiments/logs"

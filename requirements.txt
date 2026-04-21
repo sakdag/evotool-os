@@ -1,0 +1,11 @@
+torch>=2.3.0
+transformers>=4.45.0
+vllm>=0.4.0
+openai>=1.30.0
+pydantic>=2.0.0
+pyyaml>=6.0
+tqdm>=4.66.0
+rich>=13.0.0
+bfcl-eval>=2026.1.0
+numpy>=1.26.0
+matplotlib>=3.8.0
