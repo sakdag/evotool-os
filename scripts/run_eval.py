@@ -55,6 +55,7 @@ def main() -> None:
     parser.add_argument("--output", default=None, help="Output JSON file for results.")
     parser.add_argument("--max-steps", type=int, default=30)
     parser.add_argument("--limit", type=int, default=None, help="Limit number of test tasks (for quick tests).")
+    parser.add_argument("--force", action="store_true", help="Re-run even if output file already exists.")
     args = parser.parse_args()
 
     if not args.policy and not args.use_initial:
@@ -85,6 +86,11 @@ def main() -> None:
         results_dir = Path(cfg.get("paths", {}).get("results_dir", "experiments/results"))
         results_dir.mkdir(parents=True, exist_ok=True)
         output_path = results_dir / f"eval_{args.benchmark}_{policy_label}.json"
+
+    if output_path.exists() and not getattr(args, "force", False):
+        logger.info("Output already exists, skipping: %s  (use --force to re-run)", output_path)
+        llm.close()
+        return
 
     if args.benchmark.startswith("tau_bench"):
         env_name = "retail" if "retail" in args.benchmark else "airline"

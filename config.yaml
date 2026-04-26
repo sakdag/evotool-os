@@ -24,6 +24,9 @@ evotool:
   mini_batch_size: 3       # B
   initial_population_size: 1
   max_steps_per_episode: 30
+  # Parallel episode evaluation: vLLM handles ~3 concurrent 32k-token requests.
+  # Set to 1 to disable parallelism (sequential, lower memory pressure).
+  max_workers: 3
 
 # Data Splits (seed=42 for reproducibility)
 data_splits:
@@ -34,12 +37,14 @@ data_splits:
     train_split: "train"   # retail has train/dev/test splits
     test_split: "test"
   tau_bench_airline:
-    train_size: 200
-    sel_size: 100
+    # Airline only has 50 tasks total (one split).
+    # We carve: first 40 → train(30) + sel(10); last 10 → held-out eval.
+    train_size: 30
+    sel_size: 10
     seed: 42
     train_split: "test"    # airline only has test split; we carve out train/sel
     test_split: "test"
-    test_offset: 300       # use indices [300:] for final evaluation
+    test_offset: 40        # use first 40 for train+sel; indices [40:] for eval
   bfcl_single:
     train_size: 200
     sel_size: 100

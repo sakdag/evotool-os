@@ -90,6 +90,7 @@ def main() -> None:
     G = args.generations or evotool_cfg.get("max_generations", 8)
     B = args.batch_size or evotool_cfg.get("mini_batch_size", 3)
     max_steps = args.max_steps or evotool_cfg.get("max_steps_per_episode", 30)
+    max_workers = evotool_cfg.get("max_workers", 1)
 
     # Output path
     if args.output:
@@ -207,6 +208,7 @@ def _run_tau_bench(env_name, cfg, splits_cfg, llm, G, B, max_steps, ablation, ou
 
     loop_env = TauBenchLoopEnv(wrapper, llm)
 
+    ckpt_path = output_path.with_suffix(".ckpt.json")
     result = run_evotool(
         train_pool=train_pool,
         sel_set=sel_set,
@@ -218,6 +220,8 @@ def _run_tau_bench(env_name, cfg, splits_cfg, llm, G, B, max_steps, ablation, ou
         ablation=ablation,
         log_dir=log_dir,
         benchmark_name=benchmark_name,
+        max_workers=max_workers,
+        checkpoint_path=ckpt_path,
     )
 
     _exec.execute_policy = _orig_execute  # restore
@@ -268,6 +272,7 @@ def _run_bfcl(subset, cfg, splits_cfg, llm, G, B, max_steps, ablation, output_pa
 
     _exec.execute_policy = _bfcl_execute_policy
 
+    ckpt_path = output_path.with_suffix(".ckpt.json")
     result = run_evotool(
         train_pool=train_pool,
         sel_set=sel_set,
@@ -279,6 +284,8 @@ def _run_bfcl(subset, cfg, splits_cfg, llm, G, B, max_steps, ablation, output_pa
         ablation=ablation,
         log_dir=log_dir,
         benchmark_name=benchmark_name,
+        max_workers=max_workers,
+        checkpoint_path=ckpt_path,
     )
 
     _exec.execute_policy = _orig_execute

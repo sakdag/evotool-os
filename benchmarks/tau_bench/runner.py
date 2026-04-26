@@ -246,6 +246,19 @@ class TauBenchEnvWrapper(BenchmarkEnv):
         self._last_reward: float = 0.0
         self._initial_observation: str = ""
 
+    def clone(self) -> "TauBenchEnvWrapper":
+        """Return a fresh wrapper with the same config but no shared tau env.
+        Used by parallel evaluation (each thread needs its own env instance)."""
+        return TauBenchEnvWrapper(
+            env_name=self.env_name,
+            task_split=self.task_split,
+            user_model=self.user_model,
+            user_strategy=self.user_strategy,
+            user_provider=self.user_provider,
+            tools_info=self.tools_info,
+            wiki=self.wiki,
+        )
+
     def _create_env(self) -> Any:
         """Create a fresh tau-bench env (requires vLLM to be running)."""
         _patch_tau_bench_user_init()

@@ -17,6 +17,7 @@ import logging
 import os
 import random
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Callable, Literal
@@ -131,6 +132,8 @@ def run_evotool(
     ablation: AblationMode = "full",
     log_dir: str | Path | None = None,
     benchmark_name: str = "",
+    max_workers: int = 1,
+    checkpoint_path: str | Path | None = None,
 ) -> EvoToolResult:
     """
     EVOTOOL Algorithm 1.
@@ -156,8 +159,8 @@ def run_evotool(
 
     blamer = Blamer(llm)
     mutator = Mutator(llm)
-    population = Population([initial_policy])
     generation_logs: list[GenerationLog] = []
+    start_generation = 1
 
     # ----------------------------------------------------------------
     # Static baseline: no evolution
@@ -171,17 +174,28 @@ def run_evotool(
             benchmark=benchmark_name,
         )
 
+    env_factory = getattr(env, "clone", None) or (lambda: env)
+
     # ----------------------------------------------------------------
-    # Algorithm 1 line 2: initialise win frequencies on S_sel
+    # Resume from checkpoint if one exists; otherwise start fresh
     # ----------------------------------------------------------------
-    logger.info("=== EVOTOOL [%s, ablation=%s] ===", benchmark_name or "?", ablation)
-    logger.info("Initialising population on S_sel (%d instances)...", len(sel_set))
-    population.initialize_win_frequencies(sel_set, env, llm, max_steps_per_episode)
+    ckpt_path = Path(checkpoint_path) if checkpoint_path else None
+    if ckpt_path and ckpt_path.exists():
+        population, generation_logs, start_generation = _load_checkpoint(ckpt_path)
+        logger.info(
+            "Resumed from checkpoint %s (completed %d/%d gens, pop=%d).",
+            ckpt_path, start_generation - 1, max_generations, population.size(),
+        )
+    else:
+        population = Population([initial_policy])
+        logger.info("=== EVOTOOL [%s, ablation=%s] ===", benchmark_name or "?", ablation)
+        logger.info("Initialising population on S_sel (%d instances)...", len(sel_set))
+        population.initialize_win_frequencies(sel_set, env, llm, max_steps_per_episode, max_workers)
 
     # ----------------------------------------------------------------
     # Main loop: G generations
     # ----------------------------------------------------------------
-    for g in range(1, max_generations + 1):
+    for g in range(start_generation, max_generations + 1):
         logger.info("\n--- Generation %d/%d ---", g, max_generations)
 
         # --------------------------------------------------------
@@ -192,14 +206,9 @@ def run_evotool(
         batch = random.sample(train_pool, min(mini_batch_size, len(train_pool)))
 
         logger.info("  Parent: %s  Batch size: %d", parent_cand.uid, len(batch))
-        batch_records: list[EpisodeRecord] = []
-        for task in batch:
-            try:
-                ep = execute_policy(parent_policy, task, env, llm, max_steps_per_episode)
-                batch_records.append(ep)
-                logger.debug("    Task %s: reward=%.1f", task.task_id, ep.reward)
-            except Exception as exc:
-                logger.warning("    Episode failed for task %s: %s", task.task_id, exc)
+        batch_records: list[EpisodeRecord] = _run_batch(
+            parent_policy, batch, env_factory, llm, max_steps_per_episode, max_workers
+        )
 
         if not batch_records:
             logger.warning("  No valid episodes; skipping generation %d.", g)
@@ -222,7 +231,7 @@ def run_evotool(
             try:
                 blame_result = blamer.run(batch_records, diagnostics)
                 blamed_module = blame_result.blamed_module
-                blame_scores = blame_result.blame_scores
+                blame_scores = blame_result.scores  # field is `scores`, not `blame_scores`
                 logger.info("  Blame → %s  (scores: %s)", blamed_module, blame_scores)
             except Exception as exc:
                 logger.warning("  Blamer failed: %s", exc)
@@ -255,13 +264,9 @@ def run_evotool(
                 child_policy = parent_policy.copy()
 
             # Evaluate child on mini-batch
-            child_records: list[EpisodeRecord] = []
-            for task in batch:
-                try:
-                    ep = execute_policy(child_policy, task, env, llm, max_steps_per_episode)
-                    child_records.append(ep)
-                except Exception as exc:
-                    logger.warning("    Child eval failed for task %s: %s", task.task_id, exc)
+            child_records: list[EpisodeRecord] = _run_batch(
+                child_policy, batch, env_factory, llm, max_steps_per_episode, max_workers
+            )
 
         batch_child_reward = sum(e.reward for e in child_records) / len(child_records) if child_records else 0.0
         logger.info("  Batch child reward: %.3f", batch_child_reward)
@@ -275,7 +280,7 @@ def run_evotool(
         # PHASE 4: Diversity-Aware Population Selection on S_sel
         # --------------------------------------------------------
         logger.info("  Running diversity selection on S_sel...")
-        population.diversity_selection(sel_set, env, llm, max_steps_per_episode)
+        population.diversity_selection(sel_set, env, llm, max_steps_per_episode, max_workers)
 
         sel_scores = {c.uid: c.sel_score for c in population.candidates}
 
@@ -295,6 +300,11 @@ def run_evotool(
 
         if log_dir:
             _write_gen_log(log_dir, benchmark_name, g, gen_log)
+
+        # Save checkpoint after every generation so the run can be resumed
+        if ckpt_path:
+            _save_checkpoint(ckpt_path, population, generation_logs, g + 1)
+            logger.debug("  Checkpoint saved to %s (next gen=%d).", ckpt_path, g + 1)
 
         logger.info(
             "  Generation %d done | pop=%d | best S_sel=%.3f",
@@ -408,6 +418,103 @@ def _extract_section(text: str, tag: str) -> str:
     if m:
         return m.group(1).strip()
     return ""
+
+
+def _save_checkpoint(
+    path: Path,
+    population: "Population",
+    generation_logs: list[GenerationLog],
+    next_generation: int,
+) -> None:
+    """Persist current population + logs so the run can be resumed after a crash."""
+    from evotool.selection.population import Candidate
+    ckpt = {
+        "next_generation": next_generation,
+        "generation_logs": [g.to_dict() for g in generation_logs],
+        "population": [
+            {
+                "uid": c.uid,
+                "win_frequency": c.win_frequency,
+                "sel_score": c.sel_score,
+                "policy": c.policy.to_dict(),
+            }
+            for c in population.candidates
+        ],
+    }
+    tmp = path.with_suffix(".tmp")
+    tmp.parent.mkdir(parents=True, exist_ok=True)
+    with open(tmp, "w") as f:
+        json.dump(ckpt, f, indent=2)
+    tmp.replace(path)  # atomic replace
+
+
+def _load_checkpoint(
+    path: Path,
+) -> tuple["Population", list[GenerationLog], int]:
+    """Restore population and logs from a checkpoint file."""
+    from evotool.selection.population import Candidate, Population
+    with open(path) as f:
+        ckpt = json.load(f)
+
+    candidates = []
+    for cd in ckpt["population"]:
+        cand = Candidate(policy=PolicySpec.from_dict(cd["policy"]))
+        cand.uid = cd["uid"]
+        cand.win_frequency = cd["win_frequency"]
+        cand.sel_score = cd["sel_score"]
+        candidates.append(cand)
+
+    pop = Population([])
+    pop.candidates = candidates
+
+    logs: list[GenerationLog] = []
+    for ld in ckpt.get("generation_logs", []):
+        logs.append(GenerationLog(
+            generation=ld["generation"],
+            parent_uid=ld["parent_uid"],
+            blamed_module=ld["blamed_module"],
+            blame_scores=ld["blame_scores"],
+            batch_parent_reward=ld["batch_parent_reward"],
+            batch_child_reward=ld["batch_child_reward"],
+            child_accepted=ld["child_accepted"],
+            population_size=ld["population_size"],
+            sel_scores=ld.get("sel_scores", {}),
+            timestamp=ld.get("timestamp", 0.0),
+        ))
+
+    return pop, logs, ckpt["next_generation"]
+
+
+def _run_batch(
+    policy: PolicySpec,
+    batch: list[TaskInstance],
+    env_factory: Callable[[], BenchmarkEnv],
+    llm: LLMClient,
+    max_steps: int,
+    max_workers: int = 1,
+) -> list[EpisodeRecord]:
+    """Run a mini-batch of episodes, optionally in parallel."""
+    records: list[EpisodeRecord] = []
+
+    if max_workers > 1 and len(batch) > 1:
+        futures: dict = {}
+        with ThreadPoolExecutor(max_workers=min(max_workers, len(batch))) as pool:
+            for task in batch:
+                fut = pool.submit(execute_policy, policy, task, env_factory(), llm, max_steps)
+                futures[fut] = task.task_id
+            for fut in as_completed(futures):
+                try:
+                    records.append(fut.result())
+                except Exception as exc:
+                    logger.warning("    Episode failed for task %s: %s", futures[fut], exc)
+    else:
+        for task in batch:
+            try:
+                records.append(execute_policy(policy, task, env_factory(), llm, max_steps))
+            except Exception as exc:
+                logger.warning("    Episode failed for task %s: %s", task.task_id, exc)
+
+    return records
 
 
 def _write_gen_log(log_dir: str | Path, benchmark: str, gen: int, log: GenerationLog) -> None:

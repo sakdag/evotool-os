@@ -58,6 +58,7 @@ def main() -> None:
     parser.add_argument("--output", default=None)
     parser.add_argument("--max-steps", type=int, default=30)
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--force", action="store_true", help="Re-run even if output already exists.")
     args = parser.parse_args()
 
     cfg = load_config(args.config)
@@ -70,6 +71,11 @@ def main() -> None:
     results_dir.mkdir(parents=True, exist_ok=True)
     output_path = Path(args.output) if args.output else \
         results_dir / f"baseline_{args.method}_{args.benchmark}.json"
+
+    if output_path.exists() and not args.force:
+        logger.info("Output already exists, skipping: %s  (use --force to re-run)", output_path)
+        llm.close()
+        return
 
     if args.method == "static":
         # Reuse run_eval with INITIAL_POLICY
