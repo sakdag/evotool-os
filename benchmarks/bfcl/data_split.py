@@ -7,6 +7,7 @@ Categories are loaded from the bfcl-eval package's bundled data files.
 
 from __future__ import annotations
 
+import json
 import logging
 import random
 from dataclasses import dataclass
@@ -164,6 +165,66 @@ def load_bfcl_ground_truth(category: str) -> dict[str, Any]:
                 except json.JSONDecodeError:
                     pass
     return gt
+
+
+_MULTI_TURN_FUNC_DOC_MAPPING: dict[str, str] = {
+    "GorillaFileSystem": "gorilla_file_system.json",
+    "MathAPI": "math_api.json",
+    "MessageAPI": "message_api.json",
+    "TwitterAPI": "posting_api.json",
+    "TicketAPI": "ticket_api.json",
+    "TradingBot": "trading_bot.json",
+    "TravelAPI": "travel_booking.json",
+    "VehicleControlAPI": "vehicle_control.json",
+    "WebSearchAPI": "web_search.json",
+    "MemoryAPI_kv": "memory_kv.json",
+    "MemoryAPI_vector": "memory_vector.json",
+    "MemoryAPI_rec_sum": "memory_rec_sum.json",
+}
+
+
+def load_multi_turn_func_specs(involved_classes: list[str]) -> list[dict]:
+    """
+    Load all function specs for a multi-turn BFCL task from the multi_turn_func_doc/
+    JSON files, based on the task's involved_classes list.
+
+    Returns a list of BFCL-format function spec dicts (name, description, parameters).
+    """
+    data_dir = get_bfcl_data_dir()
+    func_doc_dir = data_dir / "multi_turn_func_doc"
+
+    specs: list[dict] = []
+    for class_name in involved_classes:
+        doc_file = _MULTI_TURN_FUNC_DOC_MAPPING.get(class_name)
+        if not doc_file:
+            logger.warning("No func-doc file mapping for class %s", class_name)
+            continue
+        doc_path = func_doc_dir / doc_file
+        if not doc_path.exists():
+            logger.warning("Func-doc file not found: %s", doc_path)
+            continue
+        try:
+            with open(doc_path) as fh:
+                content = fh.read().strip()
+            # Files may be a JSON array or JSONL (one object per line)
+            try:
+                class_specs = json.loads(content)
+                if isinstance(class_specs, list):
+                    specs.extend(class_specs)
+                else:
+                    specs.append(class_specs)
+            except json.JSONDecodeError:
+                for line in content.splitlines():
+                    line = line.strip()
+                    if line:
+                        try:
+                            specs.append(json.loads(line))
+                        except json.JSONDecodeError:
+                            pass
+        except Exception as exc:
+            logger.warning("Failed loading func-doc for %s: %s", class_name, exc)
+
+    return specs
 
 
 def load_all_bfcl(categories: list[str]) -> tuple[list[dict], dict[str, Any]]:

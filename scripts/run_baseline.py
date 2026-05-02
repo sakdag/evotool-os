@@ -33,6 +33,8 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     datefmt="%H:%M:%S",
 )
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("LiteLLM").setLevel(logging.WARNING)
 logger = logging.getLogger("run_baseline")
 
 
@@ -59,9 +61,12 @@ def main() -> None:
     parser.add_argument("--max-steps", type=int, default=30)
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--force", action="store_true", help="Re-run even if output already exists.")
+    parser.add_argument("--fast", action="store_true", help="Fast mode: limit test set to 6 tasks.")
     args = parser.parse_args()
 
     cfg = load_config(args.config)
+    if args.fast and not args.limit:
+        args.limit = 6
     llm_cfg = cfg.get("llm", {})
 
     from evotool.llm.client import LLMClient, LLMConfig
@@ -209,6 +214,7 @@ def _react_bfcl(benchmark, cfg, llm, max_steps, limit, output_path):
 
     for i, task in enumerate(test_tasks):
         logger.info("  [%d/%d] %s", i + 1, len(test_tasks), task.task_id)
+        env.reset_episode()
         try:
             ep = run_react_episode(task, env, llm, max_steps)
             reward = ep.reward

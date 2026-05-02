@@ -227,15 +227,53 @@ def _print_ablation_table(results: dict[str, dict]) -> None:
     }
 
     ablation_results: dict[str, dict] = {}
+
+    # Build a priority-aware lookup: prefer eval_ files over training output files,
+    # and skip checkpoint (.ckpt.json) files entirely.
+    def _ablation_score(stem: str, data: dict, bench_type: str) -> float | None:
+        """Return the metric value iff the file is a proper eval/result file."""
+        if ".ckpt" in stem:
+            return None  # skip checkpoint files
+        if bench_type == "tau_bench":
+            v = data.get("pass_at_1")
+            return float(v) if v is not None else None
+        else:
+            v = data.get("accuracy")
+            return float(v) if v is not None else None
+
     for stem, data in results.items():
+        if ".ckpt" in stem:
+            continue  # always skip checkpoint files in analysis
         for variant in ablation_variants:
-            if f"ablation_{variant}" in stem or (variant == "full" and "evotool" in stem and "ablation" not in stem):
-                if variant not in ablation_results:
-                    ablation_results[variant] = {}
-                if "retail" in stem or "airline" in stem:
-                    ablation_results[variant]["tau_bench"] = data.get("pass_at_1", 0)
-                elif "bfcl" in stem:
-                    ablation_results[variant]["bfcl"] = data.get("accuracy", 0)
+            is_ablation = f"ablation_{variant}" in stem
+            is_full = variant == "full" and "evotool" in stem and "ablation" not in stem
+            if not (is_ablation or is_full):
+                continue
+
+            if variant not in ablation_results:
+                ablation_results[variant] = {}
+
+            # Determine benchmark type
+            if "retail" in stem or "airline" in stem:
+                bench_type = "tau_bench"
+            elif "bfcl" in stem:
+                bench_type = "bfcl"
+            else:
+                continue
+
+            score = _ablation_score(stem, data, bench_type)
+            if score is None:
+                continue
+
+            # Prefer eval_ files: only overwrite if we don't have a value yet,
+            # or if this is an eval_ file (higher priority).
+            key = bench_type
+            is_eval_file = stem.startswith("eval_")
+            if key not in ablation_results[variant]:
+                ablation_results[variant][key] = score
+            elif is_eval_file:
+                # eval_ files always win over training output files
+                ablation_results[variant][key] = score
 
     if not ablation_results:
         return

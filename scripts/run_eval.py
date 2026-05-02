@@ -23,6 +23,7 @@ import argparse
 import json
 import logging
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -34,6 +35,8 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     datefmt="%H:%M:%S",
 )
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("LiteLLM").setLevel(logging.WARNING)
 logger = logging.getLogger("run_eval")
 
 
@@ -56,6 +59,8 @@ def main() -> None:
     parser.add_argument("--max-steps", type=int, default=30)
     parser.add_argument("--limit", type=int, default=None, help="Limit number of test tasks (for quick tests).")
     parser.add_argument("--force", action="store_true", help="Re-run even if output file already exists.")
+    parser.add_argument("--workers", type=int, default=None, help="Parallel workers (overrides config).")
+    parser.add_argument("--fast", action="store_true", help="Fast mode: limit test set to 6 tasks.")
     args = parser.parse_args()
 
     if not args.policy and not args.use_initial:
@@ -63,6 +68,9 @@ def main() -> None:
 
     cfg = load_config(args.config)
     llm_cfg = cfg.get("llm", {})
+    max_workers = args.workers or cfg.get("evotool", {}).get("max_workers", 1)
+    if args.fast and not args.limit:
+        args.limit = 6
 
     from evotool.llm.client import LLMClient, LLMConfig
     from evotool.agent.modules import INITIAL_POLICY
@@ -94,15 +102,15 @@ def main() -> None:
 
     if args.benchmark.startswith("tau_bench"):
         env_name = "retail" if "retail" in args.benchmark else "airline"
-        _eval_tau_bench(env_name, policy, cfg, llm, args.max_steps, args.limit, output_path)
+        _eval_tau_bench(env_name, policy, cfg, llm, args.max_steps, args.limit, output_path, max_workers)
     else:
         subset = "single" if "single" in args.benchmark else "multi"
-        _eval_bfcl(subset, policy, cfg, llm, args.max_steps, args.limit, output_path)
+        _eval_bfcl(subset, policy, cfg, llm, args.max_steps, args.limit, output_path, max_workers)
 
     llm.close()
 
 
-def _eval_tau_bench(env_name, policy, cfg, llm, max_steps, limit, output_path):
+def _eval_tau_bench(env_name, policy, cfg, llm, max_steps, limit, output_path, max_workers=1):
     from benchmarks.tau_bench.data_split import make_splits
     from benchmarks.tau_bench.runner import load_tau_bench_tasks, execute_tau_bench_episode
     from benchmarks.tau_bench.evaluator import TauBenchResult, save_result
@@ -140,23 +148,42 @@ def _eval_tau_bench(env_name, policy, cfg, llm, max_steps, limit, output_path):
     if limit:
         test_tasks = test_tasks[:limit]
 
-    logger.info("Evaluating on %d test tasks...", len(test_tasks))
-    per_task_rewards = []
-    n_success = 0
-
-    for i, task in enumerate(test_tasks):
-        logger.info("  [%d/%d] %s", i + 1, len(test_tasks), task.task_id)
-        try:
-            ep = execute_tau_bench_episode(policy, task, wrapper, llm, max_steps)
-            reward = ep.reward
-        except Exception as exc:
-            logger.warning("  Failed: %s", exc)
-            reward = 0.0
-        if reward >= 1.0 - 1e-6:
-            n_success += 1
-        per_task_rewards.append({"task_id": task.task_id, "reward": reward})
-
     total = len(test_tasks)
+    logger.info("Evaluating on %d test tasks (workers=%d)...", total, max_workers)
+
+    rewards: dict[int, float] = {}
+
+    def _run_one(idx: int, task):
+        env = wrapper.clone()
+        try:
+            ep = execute_tau_bench_episode(policy, task, env, llm, max_steps)
+            return idx, ep.reward
+        except Exception as exc:
+            logger.warning("  Failed task %s: %s", task.task_id, exc)
+            return idx, 0.0
+
+    if max_workers > 1:
+        futures = {}
+        with ThreadPoolExecutor(max_workers=max_workers) as pool:
+            for i, task in enumerate(test_tasks):
+                futures[pool.submit(_run_one, i, task)] = i
+            done = 0
+            for fut in as_completed(futures):
+                idx, reward = fut.result()
+                rewards[idx] = reward
+                done += 1
+                logger.info("  [%d/%d] %s → %.3f", done, total, test_tasks[idx].task_id, reward)
+    else:
+        for i, task in enumerate(test_tasks):
+            logger.info("  [%d/%d] %s", i + 1, total, task.task_id)
+            _, reward = _run_one(i, task)
+            rewards[i] = reward
+
+    per_task_rewards = [
+        {"task_id": test_tasks[i].task_id, "reward": rewards[i]}
+        for i in range(total)
+    ]
+    n_success = sum(1 for r in rewards.values() if r >= 1.0 - 1e-6)
     pass_at_1 = 100.0 * n_success / total if total > 0 else 0.0
 
     result = TauBenchResult(
@@ -173,7 +200,7 @@ def _eval_tau_bench(env_name, policy, cfg, llm, max_steps, limit, output_path):
     save_result(result, output_path)
 
 
-def _eval_bfcl(subset, policy, cfg, llm, max_steps, limit, output_path):
+def _eval_bfcl(subset, policy, cfg, llm, max_steps, limit, output_path, max_workers=1):
     from benchmarks.bfcl.data_split import (
         SINGLE_TURN_CATEGORIES, MULTI_TURN_CATEGORIES,
         load_all_bfcl, make_bfcl_splits,
@@ -197,29 +224,48 @@ def _eval_bfcl(subset, policy, cfg, llm, max_steps, limit, output_path):
         test_instances = test_instances[:limit]
 
     test_tasks = load_bfcl_tasks(test_instances, all_gt, is_multi_turn)
-    env = BFCLEnv(ground_truth=all_gt, is_multi_turn=is_multi_turn)
+    total = len(test_tasks)
 
-    logger.info("Evaluating on %d test instances...", len(test_tasks))
-    per_instance = []
-    per_category: dict = {cat: [] for cat in categories}
-    n_correct = 0
+    logger.info("Evaluating on %d test instances (workers=%d)...", total, max_workers)
 
-    for i, task in enumerate(test_tasks):
-        logger.info("  [%d/%d] %s", i + 1, len(test_tasks), task.task_id)
+    rewards: dict[int, float] = {}
+
+    def _run_one(idx: int, task):
+        env = BFCLEnv(ground_truth=all_gt, is_multi_turn=is_multi_turn)
         try:
             ep = execute_bfcl_episode(policy, task, env, llm, max_steps)
-            reward = ep.reward
+            return idx, ep.reward
         except Exception as exc:
-            logger.warning("  Failed: %s", exc)
-            reward = 0.0
-        if reward >= 1.0 - 1e-6:
-            n_correct += 1
-        cat = task.metadata.get("bfcl_instance", {}).get("category", "unknown")
-        if cat in per_category:
-            per_category[cat].append(reward)
-        per_instance.append({"task_id": task.task_id, "reward": reward})
+            logger.warning("  Failed task %s: %s", task.task_id, exc)
+            return idx, 0.0
 
-    total = len(test_tasks)
+    if max_workers > 1:
+        futures = {}
+        with ThreadPoolExecutor(max_workers=max_workers) as pool:
+            for i, task in enumerate(test_tasks):
+                futures[pool.submit(_run_one, i, task)] = i
+            done = 0
+            for fut in as_completed(futures):
+                idx, reward = fut.result()
+                rewards[idx] = reward
+                done += 1
+                logger.info("  [%d/%d] %s → %.3f", done, total, test_tasks[idx].task_id, reward)
+    else:
+        for i, task in enumerate(test_tasks):
+            logger.info("  [%d/%d] %s", i + 1, total, task.task_id)
+            _, reward = _run_one(i, task)
+            rewards[i] = reward
+
+    per_category: dict = {cat: [] for cat in categories}
+    per_instance = []
+    for i in range(total):
+        r = rewards[i]
+        cat = test_tasks[i].metadata.get("bfcl_instance", {}).get("category", "unknown")
+        if cat in per_category:
+            per_category[cat].append(r)
+        per_instance.append({"task_id": test_tasks[i].task_id, "reward": r})
+
+    n_correct = sum(1 for r in rewards.values() if r >= 1.0 - 1e-6)
     accuracy = 100.0 * n_correct / total if total > 0 else 0.0
     per_cat_acc = {
         cat: (100.0 * sum(v) / len(v) if v else 0.0)

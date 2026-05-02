@@ -22,7 +22,8 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Callable, Literal
 
-from evotool.agent.executor import BenchmarkEnv, EpisodeRecord, TaskInstance, execute_policy
+import evotool.agent.executor as _executor_mod
+from evotool.agent.executor import BenchmarkEnv, EpisodeRecord, TaskInstance
 from evotool.agent.modules import INITIAL_POLICY, PolicySpec
 from evotool.blamer.blamer import Blamer, BlameResult
 from evotool.blamer.diagnostics import DiagnosticEvents, extract_diagnostics
@@ -404,7 +405,7 @@ def _monolithic_mutate(
     child_records: list[EpisodeRecord] = []
     for task in batch:
         try:
-            ep = execute_policy(child_policy, task, env, llm, max_steps)
+            ep = _executor_mod.execute_policy(child_policy, task, env, llm, max_steps)
             child_records.append(ep)
         except Exception:
             pass
@@ -500,7 +501,7 @@ def _run_batch(
         futures: dict = {}
         with ThreadPoolExecutor(max_workers=min(max_workers, len(batch))) as pool:
             for task in batch:
-                fut = pool.submit(execute_policy, policy, task, env_factory(), llm, max_steps)
+                fut = pool.submit(_executor_mod.execute_policy, policy, task, env_factory(), llm, max_steps)
                 futures[fut] = task.task_id
             for fut in as_completed(futures):
                 try:
@@ -510,7 +511,7 @@ def _run_batch(
     else:
         for task in batch:
             try:
-                records.append(execute_policy(policy, task, env_factory(), llm, max_steps))
+                records.append(_executor_mod.execute_policy(policy, task, env_factory(), llm, max_steps))
             except Exception as exc:
                 logger.warning("    Episode failed for task %s: %s", task.task_id, exc)
 

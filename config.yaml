@@ -9,8 +9,10 @@ llm:
   api_key: "dummy"
   # Agent modules run without extended thinking (speed + token economy)
   agent_thinking: false
-  # Blamer/Mutator benefit from extended reasoning
-  blamer_thinking: true
+  # Blamer outputs structured text (scores + evidence) — thinking mode burns all
+  # tokens on reasoning and leaves none for the actual formatted output.
+  blamer_thinking: false
+  # Mutator benefits from extended reasoning to craft improved prompts
   mutator_thinking: true
   max_tokens: 2048
   temperature: 0.7

@@ -31,6 +31,8 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     datefmt="%H:%M:%S",
 )
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("LiteLLM").setLevel(logging.WARNING)
 logger = logging.getLogger("run_evotool")
 
 
@@ -74,6 +76,10 @@ def main() -> None:
     parser.add_argument(
         "--seed", type=int, default=42, help="Random seed."
     )
+    parser.add_argument(
+        "--fast", action="store_true",
+        help="Fast mode: tiny splits + 2 generations for quick smoke-testing.",
+    )
     args = parser.parse_args()
 
     import random
@@ -91,6 +97,15 @@ def main() -> None:
     B = args.batch_size or evotool_cfg.get("mini_batch_size", 3)
     max_steps = args.max_steps or evotool_cfg.get("max_steps_per_episode", 30)
     max_workers = evotool_cfg.get("max_workers", 1)
+
+    # Fast mode: override splits and generations with tiny values
+    if args.fast:
+        logger.info("FAST MODE enabled — using tiny data splits and 2 generations.")
+        G = 2
+        B = 2
+        for key in splits_cfg:
+            splits_cfg[key]["train_size"] = 4
+            splits_cfg[key]["sel_size"] = 3
 
     # Output path
     if args.output:
@@ -124,6 +139,7 @@ def main() -> None:
             output_path=output_path,
             log_dir=log_dir,
             benchmark_name=args.benchmark,
+            max_workers=max_workers,
         )
     else:
         subset = "single" if "single" in args.benchmark else "multi"
@@ -137,12 +153,13 @@ def main() -> None:
             output_path=output_path,
             log_dir=log_dir,
             benchmark_name=args.benchmark,
+            max_workers=max_workers,
         )
 
     llm.close()
 
 
-def _run_tau_bench(env_name, cfg, splits_cfg, llm, G, B, max_steps, ablation, output_path, log_dir, benchmark_name):
+def _run_tau_bench(env_name, cfg, splits_cfg, llm, G, B, max_steps, ablation, output_path, log_dir, benchmark_name, max_workers=1):
     from benchmarks.tau_bench.data_split import make_splits
     from benchmarks.tau_bench.runner import load_tau_bench_tasks, execute_tau_bench_episode, TauBenchEnvWrapper
     from evotool.evolution.loop import run_evotool
@@ -230,7 +247,7 @@ def _run_tau_bench(env_name, cfg, splits_cfg, llm, G, B, max_steps, ablation, ou
     logger.info("Done. Best policy saved to %s", output_path)
 
 
-def _run_bfcl(subset, cfg, splits_cfg, llm, G, B, max_steps, ablation, output_path, log_dir, benchmark_name):
+def _run_bfcl(subset, cfg, splits_cfg, llm, G, B, max_steps, ablation, output_path, log_dir, benchmark_name, max_workers=1):
     from benchmarks.bfcl.data_split import (
         SINGLE_TURN_CATEGORIES, MULTI_TURN_CATEGORIES,
         load_all_bfcl, make_bfcl_splits,

@@ -161,19 +161,31 @@ def _parse_blame_output(text: str) -> BlameResult:
     3. One sentence diagnosis
     ...
     """
+    logger.debug("Blamer raw output (first 600 chars): %s", text[:600])
+
     scores: dict[str, float] = {}
     evidence = ""
     diagnosis = ""
 
-    # Extract scores block
-    score_pattern = re.compile(
-        r"(planner|selector|caller|synthesizer)\s+(0?\.\d+|\d+(?:\.\d+)?)",
-        re.IGNORECASE,
+    # --- Step 1: isolate the Scores section to avoid false matches in Evidence ---
+    section_match = re.search(
+        r"(?:1\.\s*)?Scores?\s*\n(.*?)(?:\n\s*2\.|\n\s*Evidence|$)",
+        text, re.DOTALL | re.IGNORECASE,
     )
-    for m in score_pattern.finditer(text):
+    scores_text = section_match.group(1) if section_match else text
+
+    # --- Step 2: line-anchored pattern inside scores section ---
+    # Handles: "planner 0.7", "- planner: 0.7", "* Planner - 0.7", "planner: 0.7"
+    score_pattern = re.compile(
+        r"^\s*[-*•]?\s*\b(planner|selector|caller|synthesizer)\b\s*[:\-]?\s*(\d+(?:\.\d+)?)",
+        re.IGNORECASE | re.MULTILINE,
+    )
+    for m in score_pattern.finditer(scores_text):
         module = m.group(1).lower()
+        if module in scores:
+            continue  # keep first match per module
         try:
-            scores[module] = float(m.group(2))
+            scores[module] = min(max(float(m.group(2)), 0.0), 1.0)
         except ValueError:
             scores[module] = 0.0
 
@@ -182,12 +194,18 @@ def _parse_blame_output(text: str) -> BlameResult:
         if mod not in scores:
             scores[mod] = 0.0
 
-    # Extract evidence section
+    # Warn when all zeros — likely the section boundary wasn't found
+    if all(v == 0.0 for v in scores.values()):
+        logger.warning(
+            "Blamer returned all-zero scores — parse may have failed. "
+            "Raw output (first 500 chars):\n%s", text[:500]
+        )
+
+    # --- Step 3: evidence and diagnosis ---
     ev_match = re.search(r"2\.\s*Evidence\s*\n(.*?)(?:3\.|$)", text, re.DOTALL | re.IGNORECASE)
     if ev_match:
         evidence = ev_match.group(1).strip()
 
-    # Extract diagnosis
     diag_match = re.search(r"3\.\s*One sentence diagnosis\s*\n(.+)", text, re.DOTALL | re.IGNORECASE)
     if diag_match:
         diagnosis = diag_match.group(1).strip().split("\n")[0]

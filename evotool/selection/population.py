@@ -20,7 +20,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 from typing import Callable
 
-from evotool.agent.executor import BenchmarkEnv, EpisodeRecord, TaskInstance, execute_policy
+import evotool.agent.executor as _executor_mod
+from evotool.agent.executor import BenchmarkEnv, EpisodeRecord, TaskInstance
 from evotool.agent.modules import PolicySpec
 from evotool.llm.client import LLMClient
 
@@ -211,7 +212,7 @@ class Population:
                 for i, cand in enumerate(self.candidates):
                     try:
                         fresh_env = env_factory()
-                        ep = execute_policy(cand.policy, task, fresh_env, llm, max_steps)
+                        ep = _executor_mod.execute_policy(cand.policy, task, fresh_env, llm, max_steps)
                         rewards[i][j] = ep.reward
                     except Exception as exc:
                         logger.warning(
@@ -265,7 +266,7 @@ def _eval_single(
 ) -> float:
     """Run one episode and return its reward. Used by the ThreadPoolExecutor."""
     env = env_factory()
-    ep = execute_policy(policy, task, env, llm, max_steps)
+    ep = _executor_mod.execute_policy(policy, task, env, llm, max_steps)
     return ep.reward
 
 

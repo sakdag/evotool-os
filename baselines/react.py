@@ -185,21 +185,29 @@ def _parse_react_output(raw: str) -> tuple[str, str, dict]:
     if t_match:
         thought = t_match.group(1).strip()
 
-    a_match = re.search(r"Action:\s*(\w+)\s*\((.+)\)\s*$", raw, re.DOTALL)
+    # Match "Action: func_name(...)" on a single line (most reliable)
+    a_match = re.search(r"Action:\s*(\w+)\s*\(([^)]*)\)", raw)
+    if not a_match:
+        # Fallback: allow multi-line args (JSON objects spanning lines)
+        a_match = re.search(r"Action:\s*(\w+)\s*\((\{.*?\})\)", raw, re.DOTALL)
     if a_match:
         action_name = a_match.group(1).strip()
         args_str = a_match.group(2).strip()
         try:
             action_args = json.loads(args_str)
         except json.JSONDecodeError:
-            # Try wrapping in braces
+            # Try wrapping bare key=value pairs in braces
             try:
                 action_args = json.loads(f"{{{args_str}}}")
             except json.JSONDecodeError:
-                action_args = {"raw": args_str}
+                # Try replacing Python-style single quotes with double quotes
+                try:
+                    action_args = json.loads(args_str.replace("'", '"'))
+                except json.JSONDecodeError:
+                    action_args = {"raw": args_str}
     else:
-        # Fallback: look for any JSON in the output
-        j_match = re.search(r"\{.*\}", raw, re.DOTALL)
+        # Fallback: look for any JSON object in the output
+        j_match = re.search(r"\{.*?\}", raw, re.DOTALL)
         if j_match:
             try:
                 action_args = json.loads(j_match.group())
