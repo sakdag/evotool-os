@@ -358,6 +358,9 @@ def execute_tau_bench_episode(
         logger.warning("Planner failed: %s", exc)
         plan = "Handle the customer request step by step using available tools."
 
+    consecutive_think = 0  # guard against think-loop stalls
+    recent_calls: dict[str, int] = {}  # (tool:args) → count, for loop detection
+
     while steps_taken < max_steps and not wrapper._env_done:
         history_text = "\n".join(conversation_history[-10:])
 
@@ -369,6 +372,8 @@ def execute_tau_bench_episode(
             tool_name, is_done = _parse_selector_output(sel_raw)
             sel_step.observation = f"Selected: {tool_name or 'respond'}"
             trajectory.append(sel_step)
+            logger.debug("[%s] step=%d selector→%s (raw: %s)",
+                         task.task_id, steps_taken, tool_name or "DONE", sel_raw[:120])
         except Exception as exc:
             logger.warning("Selector failed: %s", exc)
             break
@@ -390,6 +395,8 @@ def execute_tau_bench_episode(
                     TauAction(name="respond", kwargs={"content": answer})
                 )
                 obs = resp.observation or ""
+                logger.debug("[%s] respond → done=%s reward=%s",
+                             task.task_id, resp.done, resp.reward)
                 if resp.done:
                     wrapper._env_done = True
                     wrapper._last_reward = resp.reward
@@ -420,8 +427,38 @@ def execute_tau_bench_episode(
                 {"tool": tool_call.name, "arguments": tool_call.arguments,
                  "result": obs, "success": success}
             )
+            logger.debug("[%s] step=%d call %s(%s) → success=%s obs=%s",
+                         task.task_id, steps_taken, tool_call.name,
+                         json.dumps(tool_call.arguments)[:80], success, obs[:80])
+
+            # General repeated-call guard: if the same (tool, args) was already
+            # tried twice and keeps failing, inject a redirect message.
+            call_key = f"{tool_call.name}:{json.dumps(tool_call.arguments, sort_keys=True)}"
+            recent_calls[call_key] = recent_calls.get(call_key, 0) + 1
+            if recent_calls[call_key] >= 2 and not success:
+                conversation_history.append(
+                    f"[SYSTEM] '{tool_call.name}' with these arguments has failed "
+                    f"{recent_calls[call_key]} times. Do NOT repeat it. "
+                    "Try a different tool or different arguments to make progress."
+                )
+                logger.debug("[%s] repeated-call guard triggered for %s at step=%d",
+                             task.task_id, tool_call.name, steps_taken)
+
+            # Track consecutive think calls — break loop if stuck
+            if tool_call.name == "think":
+                consecutive_think += 1
+                if consecutive_think >= 3:
+                    conversation_history.append(
+                        "[SYSTEM] You have been thinking without acting for too long. "
+                        "Stop thinking and take a concrete tool action or respond to the user."
+                    )
+                    consecutive_think = 0
+                    logger.debug("[%s] think-loop guard triggered at step=%d", task.task_id, steps_taken)
+            else:
+                consecutive_think = 0
+
             conversation_history.append(
-                f"[TOOL:{tool_call.name}] {json.dumps(tool_call.arguments)} → {obs[:200]}"
+                f"[TOOL:{tool_call.name}] {json.dumps(tool_call.arguments)} → {obs[:800]}"
             )
 
         steps_taken += 1

@@ -40,13 +40,15 @@ data_splits:
     test_split: "test"
   tau_bench_airline:
     # Airline only has 50 tasks total (one split).
-    # We carve: first 40 → train(30) + sel(10); last 10 → held-out eval.
+    # Paper evaluates on the full official test split (all 50 tasks),
+    # while carving out S_train(30) + S_sel(10) from the same 50.
+    # test_offset=0 → eval on all 50 (matches paper's "official evaluation split").
     train_size: 30
     sel_size: 10
     seed: 42
-    train_split: "test"    # airline only has test split; we carve out train/sel
+    train_split: "test"    # airline only has test split
     test_split: "test"
-    test_offset: 40        # use first 40 for train+sel; indices [40:] for eval
+    test_offset: 0         # evaluate on full 50-task official split (paper protocol)
   bfcl_single:
     train_size: 200
     sel_size: 100

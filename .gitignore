@@ -17,6 +17,7 @@ env/
 
 # Experiment outputs (results, logs, plots — generated at runtime)
 experiments/results/
+experiments/results_fast/
 experiments/logs/
 experiments/bfcl/
 experiments/run_all.log

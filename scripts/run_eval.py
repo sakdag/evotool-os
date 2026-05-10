@@ -61,7 +61,12 @@ def main() -> None:
     parser.add_argument("--force", action="store_true", help="Re-run even if output file already exists.")
     parser.add_argument("--workers", type=int, default=None, help="Parallel workers (overrides config).")
     parser.add_argument("--fast", action="store_true", help="Fast mode: limit test set to 6 tasks.")
+    parser.add_argument("--debug", action="store_true", help="Enable DEBUG logging for episode traces.")
     args = parser.parse_args()
+
+    if args.debug:
+        logging.getLogger("benchmarks.tau_bench.runner").setLevel(logging.DEBUG)
+        logging.getLogger("benchmarks.bfcl.runner").setLevel(logging.DEBUG)
 
     if not args.policy and not args.use_initial:
         parser.error("Provide --policy or --use-initial.")

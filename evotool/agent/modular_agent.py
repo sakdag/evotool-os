@@ -102,8 +102,10 @@ class ModularAgent:
                 "content": (
                     f"Task: {task}\n\n"
                     f"Current plan:\n{plan}\n\n"
-                    f"Execution history:\n{history or 'None'}\n\n"
+                    f"Execution history (tools already called and their results):\n{history or 'None'}\n\n"
                     f"Available tools:\n{tool_names_json}\n\n"
+                    "IMPORTANT: Check the execution history — do NOT repeat a tool that already SUCCEEDED "
+                    "with the same arguments; move to the next uncompleted step instead. "
                     "Select the single best next tool to call, or respond with "
                     '"DONE" if the task is complete without further tool calls. '
                     "Output JSON with keys: tool_name, rationale."
@@ -138,8 +140,9 @@ class ModularAgent:
                     f"Task: {task}\n\n"
                     f"Selected tool: {tool_name}\n"
                     f"Tool specification:\n{json.dumps(tool_spec, indent=2)}\n\n"
-                    f"Execution history:\n{history or 'None'}\n\n"
-                    "Generate the exact JSON arguments for this tool call. "
+                    f"Execution history (use values returned by previous tools as arguments):\n{history or 'None'}\n\n"
+                    f"Generate the exact JSON arguments for {tool_name}. "
+                    "Use values from previous tool results where needed (e.g. use user_id from find_user result). "
                     "Output JSON with keys: tool_name, arguments (dict)."
                 ),
             },
@@ -182,20 +185,36 @@ class ModularAgent:
 # Helper: parse tool call from Caller output
 # ---------------------------------------------------------------------------
 
+_RESPOND_NAMES = frozenset({"respond", "answer", "done"})
+
+
 def _parse_tool_call(raw: str, fallback_name: str) -> ToolCall:
     """
     Extract tool name and arguments from the Caller's output.
-    Handles JSON objects and plain text with embedded JSON.
+
+    Tool-name resolution:
+    - If the Caller says "respond"/"done", honour it (signals task complete).
+    - If the Caller names a *different* tool than the Selector chose, ignore it
+      and use the Selector's choice (fallback_name) — prevents the Caller from
+      silently re-selecting a tool the Selector didn't pick.
+    - Arguments are always taken from the Caller's output.
     """
     import re
+
+    def _resolve(caller_name: str, args: dict) -> ToolCall:
+        if caller_name.lower() in _RESPOND_NAMES:
+            return ToolCall(name=caller_name, arguments=args)
+        # Use Selector's tool; ignore arbitrary Caller overrides
+        clean = {k: v for k, v in args.items() if k != "tool_name"}
+        return ToolCall(name=fallback_name, arguments=clean)
 
     text = raw.strip()
     # Try direct JSON parse
     try:
         parsed = json.loads(text)
-        name = parsed.get("tool_name", fallback_name)
-        args = parsed.get("arguments", parsed.get("tool_arguments", {}))
-        return ToolCall(name=name, arguments=args if isinstance(args, dict) else {})
+        caller_name = parsed.get("tool_name", fallback_name)
+        args = parsed.get("arguments", parsed.get("tool_arguments", parsed))
+        return _resolve(caller_name, args if isinstance(args, dict) else {})
     except json.JSONDecodeError:
         pass
 
@@ -204,9 +223,9 @@ def _parse_tool_call(raw: str, fallback_name: str) -> ToolCall:
     if match:
         try:
             parsed = json.loads(match.group())
-            name = parsed.get("tool_name", fallback_name)
-            args = parsed.get("arguments", parsed.get("tool_arguments", {}))
-            return ToolCall(name=name, arguments=args if isinstance(args, dict) else {})
+            caller_name = parsed.get("tool_name", fallback_name)
+            args = parsed.get("arguments", parsed.get("tool_arguments", parsed))
+            return _resolve(caller_name, args if isinstance(args, dict) else {})
         except json.JSONDecodeError:
             pass
 
@@ -247,7 +266,7 @@ def _parse_selector_output(raw: str) -> tuple[str, bool]:
         except json.JSONDecodeError:
             pass
 
-    # Last resort: look for a quoted tool name
+    # Last resort: look for a quoted tool name in any format
     match = re.search(r'"tool_name"\s*:\s*"([^"]+)"', raw)
     if match:
         name = match.group(1)
@@ -255,4 +274,23 @@ def _parse_selector_output(raw: str) -> tuple[str, bool]:
             return "", True
         return name, False
 
-    return "", True  # Cannot parse → treat as done
+    # Try to find any tool name mentioned after common prefixes
+    # e.g. "I will call get_order_details" or "Tool: find_user_id_by_name_zip"
+    match = re.search(
+        r'(?:call|use|tool|select|invoke|run|execute)[:\s]+["\']?(\w+)["\']?',
+        raw, re.IGNORECASE,
+    )
+    if match:
+        name = match.group(1)
+        if name.upper() not in ("DONE", "NONE", "NULL", "THE", "A", "AN"):
+            return name, False
+
+    # If output explicitly says the task is complete in plain English
+    done_phrases = ("task is complete", "no further", "nothing more", "all done",
+                    "completed", "finished", "no tool", "no action")
+    if any(p in raw.lower() for p in done_phrases):
+        return "", True
+
+    # Cannot parse and no done signal — default to done to avoid infinite loops
+    logger.warning("Selector output unparseable, defaulting to done. Raw: %s", raw[:200])
+    return "", True

@@ -72,9 +72,17 @@ def load_bfcl_tasks(
             involved_classes = inst.get("involved_classes", [])
             raw_specs = load_multi_turn_func_specs(involved_classes)
             tools = _bfcl_functions_to_tools(raw_specs)
+            initial_config = inst.get("initial_config", {})
+            config_str = (
+                f"\n\nInitial environment state:\n{json.dumps(initial_config, indent=2)}"
+                if initial_config else ""
+            )
             task_desc = (
                 "You are a function-calling agent with access to a stateful environment. "
-                "For each user request, call the correct function(s) with the right arguments.\n\n"
+                "For each user request, call the correct function(s) with the right arguments. "
+                "Use the initial environment state below to determine correct argument values — "
+                "do NOT hallucinate values that aren't in the state or user messages."
+                f"{config_str}\n\n"
                 f"First request: {user_msg}"
             )
         else:
@@ -159,27 +167,61 @@ class BFCLEnv(BenchmarkEnv):
     ) -> float:
         """
         Evaluate the episode's function calls against ground truth.
-        Returns 1.0 if all calls match, 0.0 otherwise.
+
+        Single-turn: returns 1.0 if the one expected call was made correctly.
+        Multi-turn:  returns 1.0 only if ALL expected calls across ALL turns
+                     are present in the agent's accumulated calls. Partial
+                     credit is not given — the episode must be fully correct.
         """
         gt = task.metadata.get("ground_truth", [])
+        is_multi_turn = task.metadata.get("is_multi_turn", False)
         if not gt:
             return 0.0
 
-        # Collect all caller-module actions as our function call predictions
-        caller_actions = [
-            s.action for s in trajectory if s.module == "caller"
-        ]
+        if is_multi_turn:
+            # Build the flat list of (func_name, expected_args) for every
+            # call required across all turns.
+            required: list[tuple[str, dict]] = []
+            for turn_gt in gt:
+                entries = turn_gt if isinstance(turn_gt, list) else [turn_gt]
+                for item in entries:
+                    if isinstance(item, str):
+                        parsed = _parse_gt_call_string(item)
+                        if parsed:
+                            required.append(parsed)
+                    elif isinstance(item, dict):
+                        for fn, args in item.items():
+                            required.append((fn, args if isinstance(args, dict) else {}))
 
+            if not required:
+                return 0.0
+
+            # Every required call must be present in _episode_calls.
+            for fn_name, exp_args in required:
+                matched = any(
+                    c.get("function") == fn_name
+                    and _args_match_multi(c.get("arguments", {}), exp_args)
+                    for c in self._episode_calls
+                )
+                if not matched:
+                    logger.debug(
+                        "MISMATCH: required %s(%s) not found in episode calls %s",
+                        fn_name, exp_args,
+                        [(c.get("function"), c.get("arguments")) for c in self._episode_calls]
+                    )
+                    return 0.0
+            return 1.0
+
+        # Single-turn: any matching call is sufficient.
+        caller_actions = [s.action for s in trajectory if s.module == "caller"]
         if not caller_actions and not self._episode_calls:
             return 0.0
 
-        # Try to match against ground truth
         for action in caller_actions:
             call = _parse_function_call(action)
             if call and _matches_ground_truth(call, gt):
                 return 1.0
 
-        # Also check accumulated episode calls
         for call in self._episode_calls:
             if _matches_ground_truth(call, gt):
                 return 1.0
@@ -252,6 +294,9 @@ def execute_bfcl_episode(
 
         if user_msg:
             history_lines.append(f"[USER turn {turn_idx + 1}] {user_msg}")
+            logger.debug("[%s] turn=%d user_msg=%s", task.task_id, turn_idx + 1, user_msg[:120])
+
+        turn_call_counts: dict[str, int] = {}  # (tool:args) → count within this turn
 
         # Inner loop: one selector+caller cycle per expected function call in this turn
         for _call_in_turn in range(max_calls_per_turn):
@@ -263,11 +308,15 @@ def execute_bfcl_episode(
                 tool_name, is_done = _parse_selector_output(sel_raw)
                 sel_step.observation = f"Selected: {tool_name or 'NONE'}"
                 trajectory.append(sel_step)
+                logger.debug("[%s] turn=%d call_in_turn=%d selector→%s (done=%s)",
+                             task.task_id, turn_idx + 1, _call_in_turn, tool_name, is_done)
             except Exception as exc:
                 logger.warning("Selector failed: %s", exc)
                 is_done = True
 
             if is_done or not tool_name:
+                logger.debug("[%s] turn=%d stopping inner loop (is_done=%s tool_name=%s)",
+                             task.task_id, turn_idx + 1, is_done, tool_name)
                 break  # Done with this turn (or entire episode for single-turn)
 
             history_lines.append(f"[SELECT] {tool_name}")
@@ -289,6 +338,22 @@ def execute_bfcl_episode(
             tool_results.append(
                 {"function": tool_call.name, "arguments": tool_call.arguments, "result": obs}
             )
+            logger.debug("[%s] turn=%d call %s(%s)",
+                         task.task_id, turn_idx + 1, tool_call.name,
+                         json.dumps(tool_call.arguments)[:120])
+
+            # Repeated-call guard: if same (tool, args) called twice in this turn, break
+            call_key = f"{tool_call.name}:{json.dumps(tool_call.arguments, sort_keys=True)}"
+            turn_call_counts[call_key] = turn_call_counts.get(call_key, 0) + 1
+            if turn_call_counts[call_key] >= 2:
+                history_lines.append(
+                    f"[SYSTEM] '{tool_call.name}' with these arguments was already called. "
+                    "Move to the next required action."
+                )
+                logger.debug("[%s] turn=%d repeated-call guard: %s",
+                             task.task_id, turn_idx + 1, tool_call.name)
+                break
+
             history_lines.append(
                 f"[CALL] {tool_call.name}({json.dumps(tool_call.arguments)}) → {obs}"
             )
