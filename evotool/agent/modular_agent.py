@@ -100,15 +100,15 @@ class ModularAgent:
             {
                 "role": "user",
                 "content": (
-                    f"Task: {task}\n\n"
-                    f"Current plan:\n{plan}\n\n"
-                    f"Execution history (tools already called and their results):\n{history or 'None'}\n\n"
+                    # Label fields to match the selector system prompt language
+                    # ("Given the current subgoal and the list of available tools")
+                    # and put the output instruction first so it is not buried.
+                    'Respond with JSON only — {"tool_name": "<name>", "rationale": "<one line>"}\n'
+                    'Or {"tool_name": "DONE", "rationale": "<why>"} if the task is complete.\n\n'
+                    f"Current subgoal (next uncompleted step from the plan):\n{plan}\n\n"
                     f"Available tools:\n{tool_names_json}\n\n"
-                    "IMPORTANT: Check the execution history — do NOT repeat a tool that already SUCCEEDED "
-                    "with the same arguments; move to the next uncompleted step instead. "
-                    "Select the single best next tool to call, or respond with "
-                    '"DONE" if the task is complete without further tool calls. '
-                    "Output JSON with keys: tool_name, rationale."
+                    f"Execution history:\n{history or 'None'}\n\n"
+                    f"Task context: {task}"
                 ),
             },
         ]
@@ -137,13 +137,13 @@ class ModularAgent:
             {
                 "role": "user",
                 "content": (
-                    f"Task: {task}\n\n"
+                    # Put output format first; use field names matching the caller
+                    # system prompt ("selected tool and its documentation").
+                    f'Respond with JSON only — {{"tool_name": "{tool_name}", "arguments": {{<key: value>}}}}\n\n'
                     f"Selected tool: {tool_name}\n"
-                    f"Tool specification:\n{json.dumps(tool_spec, indent=2)}\n\n"
-                    f"Execution history (use values returned by previous tools as arguments):\n{history or 'None'}\n\n"
-                    f"Generate the exact JSON arguments for {tool_name}. "
-                    "Use values from previous tool results where needed (e.g. use user_id from find_user result). "
-                    "Output JSON with keys: tool_name, arguments (dict)."
+                    f"Tool documentation:\n{json.dumps(tool_spec, indent=2)}\n\n"
+                    f"Execution history (use values from previous tool results as arguments):\n{history or 'None'}\n\n"
+                    f"Task context: {task}"
                 ),
             },
         ]

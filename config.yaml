@@ -15,6 +15,10 @@ llm:
   # Mutator benefits from extended reasoning to craft improved prompts
   mutator_thinking: true
   max_tokens: 2048
+  # Qwen3-8B-AWQ with temperature=0 (greedy) causes the Selector module to refuse
+  # to output JSON and instead ask for more information on almost every call.
+  # 0.7 keeps enough stochasticity for the Selector to work while still being
+  # reasonable for evaluation.
   temperature: 0.7
   # Fallback to OpenAI API if local inference quality is insufficient
   # Set OPENAI_API_KEY env var to enable
@@ -48,7 +52,7 @@ data_splits:
     seed: 42
     train_split: "test"    # airline only has test split
     test_split: "test"
-    test_offset: 0         # evaluate on full 50-task official split (paper protocol)
+    test_offset: 40        # skip train(30)+sel(10) tasks; evaluate only on 10 holdout tasks
   bfcl_single:
     train_size: 200
     sel_size: 100

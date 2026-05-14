@@ -35,6 +35,12 @@ echo ""
 export OPENAI_BASE_URL="http://localhost:${PORT}/v1"
 export OPENAI_API_KEY="dummy"
 
+# Run fully offline — model is already cached locally.
+# Without these, vLLM/transformers tries to reach HuggingFace on startup and
+# crashes when there is no network (e.g. after a machine reboot).
+export HF_HUB_OFFLINE=1
+export TRANSFORMERS_OFFLINE=1
+
 # VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS gives more accurate memory accounting
 export VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
 

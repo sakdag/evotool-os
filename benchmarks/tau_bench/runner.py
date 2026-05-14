@@ -197,16 +197,16 @@ def load_tau_bench_tasks(
 
 
 def _build_task_description(task: Any, wiki: str) -> str:
-    """Build a natural-language task description from a τ-Bench Task object."""
+    """Build a concise task description from a τ-Bench Task object.
+
+    The wiki (policy document) is intentionally excluded here — it is passed
+    directly to the Planner in execute_tau_bench_episode so that only the
+    Planner receives the full policy context.  The Selector and Caller then
+    work from the Planner's policy-aware plan rather than the raw wiki, which
+    avoids flooding every module with 5k+ chars of policy text.
+    """
     instruction = getattr(task, "instruction", "")
-    parts = [
-        f"Policy document (excerpt):\n{wiki[:400]}",
-        "You are a customer service agent. Assist the user by calling the appropriate "
-        "backend tools and responding helpfully. When complete, call respond() with a "
-        "final confirmation.",
-        f"(User simulator instruction: {instruction})",
-    ]
-    return "\n\n".join(parts)
+    return f"Customer request: {instruction}"
 
 
 # ---------------------------------------------------------------------------
@@ -346,10 +346,13 @@ def execute_tau_bench_episode(
     conversation_history: list[str] = [f"[USER] {initial_obs}"]
     steps_taken = 0
 
-    # Planner
+    # Planner — receives the full policy wiki so it can create a policy-aware plan.
+    # Selector and Caller receive only the concise task.task_description + the plan.
     try:
         plan, plan_step = agent.plan(
-            f"{task.task_description}\n\nUser's first message: {initial_obs}",
+            f"Policy document:\n{wrapper.wiki}\n\n"
+            f"Task: {task.task_description}\n\n"
+            f"User's first message: {initial_obs}",
             task.tools,
         )
         trajectory.append(plan_step)

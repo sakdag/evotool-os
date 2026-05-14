@@ -161,7 +161,7 @@ def _react_tau_bench(benchmark, cfg, llm, max_steps, limit, output_path):
         logger.info("  [%d/%d] %s", i + 1, len(test_tasks), task.task_id)
         try:
             wrapper.reset_for_task(task)
-            ep = run_react_episode(task, wrapper, llm, max_steps)
+            ep = run_react_episode(task, wrapper, llm, max_steps, env_wiki=wrapper.wiki)
             reward = ep.reward
         except Exception as exc:
             logger.warning("  Failed: %s", exc)
