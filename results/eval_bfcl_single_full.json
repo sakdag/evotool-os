@@ -1,0 +1,2820 @@
+{
+  "subset": "single",
+  "categories": [
+    "simple_python",
+    "multiple",
+    "parallel",
+    "parallel_multiple"
+  ],
+  "total_instances": 700,
+  "correct_instances": 560,
+  "accuracy": 80.0,
+  "per_category": {
+    "simple_python": 77.3851590106007,
+    "multiple": 71.21212121212122,
+    "parallel": 86.95652173913044,
+    "parallel_multiple": 86.39455782312925
+  },
+  "per_instance": [
+    {
+      "task_id": "simple_python_31",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_179",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_4",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_277",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_44",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_171",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_372",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_122",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_0",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_78",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_137",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_175",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_148",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_110",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_41",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_85",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_32",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_58",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_139",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_385",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_56",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_132",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_13",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_140",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_24",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_320",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_108",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_57",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_73",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_326",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_126",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_132",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_17",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_397",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_115",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_193",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_15",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_195",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_258",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_313",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_9",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_162",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_304",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_286",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_44",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_35",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_353",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_68",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_78",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_33",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_135",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_79",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_119",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_237",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_265",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_90",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_35",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_62",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_54",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_57",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_143",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_6",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_380",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_124",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_91",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_2",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_100",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_30",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_145",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_103",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_294",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_78",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_212",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_118",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_37",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_60",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_98",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_125",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_23",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_39",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_176",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_101",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_115",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_35",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_150",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_120",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_384",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_47",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_171",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_317",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_324",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_80",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_263",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_145",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_43",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_104",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_86",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_376",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_130",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_184",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_51",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_345",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_3",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_226",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_187",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_164",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_335",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_0",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_116",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_72",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_47",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_107",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_56",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_155",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_58",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_280",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_207",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_154",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_187",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_157",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_185",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_383",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_1",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_48",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_6",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_136",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_103",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_137",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_159",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_144",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_356",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_206",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_88",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_11",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_111",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_131",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_259",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_153",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_52",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_63",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_34",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_339",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_113",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_148",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_87",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_124",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_93",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_152",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_186",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_73",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_343",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_377",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_103",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_368",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_168",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_275",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_90",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_266",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_182",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_137",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_133",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_22",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_142",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_97",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_295",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_60",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_197",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_107",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_261",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_310",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_179",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_160",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_2",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_139",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_176",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_126",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_193",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_18",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_178",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_156",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_297",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_91",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_129",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_49",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_45",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_14",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_80",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_196",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_68",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_31",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_95",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_102",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_260",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_328",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_179",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_164",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_395",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_95",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_35",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_42",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_127",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_59",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_36",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_98",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_337",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_12",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_84",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_116",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_46",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_7",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_15",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_312",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_358",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_71",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_204",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_227",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_81",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_39",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_391",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_110",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_32",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_12",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_162",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_21",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_340",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_183",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_197",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_22",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_181",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_104",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_61",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_49",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_145",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_100",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_105",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_119",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_51",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_366",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_19",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_105",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_315",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_42",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_130",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_40",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_151",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_188",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_36",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_152",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_76",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_160",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_1",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_37",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_52",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_185",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_268",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_133",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_341",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_3",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_45",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_283",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_52",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_148",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_52",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_21",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_179",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_177",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_199",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_208",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_351",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_215",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_288",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_278",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_153",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_20",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_109",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_118",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_141",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_137",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_106",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_306",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_172",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_8",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_22",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_309",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_156",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_143",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_34",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_291",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_378",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_89",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_29",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_357",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_112",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_20",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_118",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_62",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_150",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_75",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_102",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_176",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_57",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_9",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_74",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_151",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_68",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_307",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_134",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_59",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_84",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_244",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_41",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_209",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_267",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_70",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_135",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_178",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_45",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_168",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_83",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_40",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_8",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_192",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_53",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_183",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_122",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_13",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_240",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_123",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_9",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_166",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_190",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_82",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_120",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_76",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_5",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_183",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_114",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_88",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_47",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_72",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_58",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_321",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_91",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_155",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_193",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_37",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_222",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_303",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_116",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_158",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_98",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_169",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_97",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_292",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_65",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_188",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_399",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_2",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_86",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_168",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_125",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_69",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_218",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_92",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_115",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_151",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_170",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_242",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_180",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_15",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_153",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_67",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_51",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_189",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_163",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_53",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_77",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_255",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_112",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_117",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_187",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_29",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_143",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_166",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_14",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_105",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_123",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_254",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_111",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_347",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_12",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_62",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_100",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_61",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_69",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_89",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_55",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_78",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_20",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_155",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_362",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_41",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_74",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_146",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_96",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_194",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_16",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_109",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_248",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_84",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_190",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_184",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_135",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_153",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_219",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_167",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_85",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_285",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_243",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_126",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_128",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_338",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_72",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_69",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_74",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_60",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_46",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_124",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_72",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_7",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_167",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_134",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_235",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_167",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_2",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_21",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_346",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_27",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_230",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_253",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_123",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_62",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_129",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_48",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_31",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_171",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_87",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_44",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_319",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_130",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_205",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_106",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_138",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_184",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_66",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_33",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_21",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_140",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_55",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_169",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_162",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_86",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_75",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_131",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_128",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_145",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_70",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_97",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_149",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_87",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_133",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_65",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_246",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_59",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_245",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_314",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_371",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_8",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_19",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_100",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_331",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_13",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_0",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_143",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_152",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_165",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_198",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_382",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_34",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_173",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_94",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_196",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_199",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_305",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_40",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_108",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_119",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_182",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_180",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_112",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_130",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_136",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_139",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_3",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_108",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_161",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_45",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_131",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_198",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_155",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_56",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_187",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_99",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_168",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_136",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_98",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_117",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_138",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_30",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_11",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_166",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_257",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_141",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_79",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_163",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_390",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_394",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_65",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_10",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_156",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_96",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_11",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_158",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_42",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_156",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_112",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_48",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_173",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_93",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_105",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_121",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_141",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_81",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_125",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_8",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_197",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_38",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_198",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_164",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_269",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_151",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_174",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_162",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_252",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_192",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_271",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_146",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_69",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_58",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_5",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_111",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_71",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_217",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_322",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_135",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_180",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_216",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_67",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_274",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_10",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_323",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_24",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_182",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_41",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_234",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_57",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_194",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_186",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_63",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_332",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_101",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_224",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_170",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_104",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_55",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_276",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_388",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_73",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_167",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_194",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_146",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_146",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_175",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_107",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_23",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_73",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_63",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_99",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_170",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_273",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_86",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_214",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_363",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_379",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_166",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_373",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_54",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_50",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_64",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_154",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_147",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_103",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_87",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_178",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_75",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_81",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_296",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_191",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_233",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_77",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_46",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_71",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_121",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_196",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_191",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_370",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_82",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_106",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_33",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_43",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_49",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_300",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_165",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_80",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_387",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_127",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_149",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_70",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_147",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_44",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_26",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_270",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_18",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_352",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_67",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_367",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_99",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_389",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_94",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_190",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_344",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_181",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_220",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_159",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_164",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_348",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_183",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_114",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_163",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_25",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_177",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_6",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_90",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_28",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_284",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_3",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_59",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_225",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_29",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_multiple_186",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_118",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_65",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_133",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_203",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_174",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_27",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_16",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_117",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_238",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_223",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_95",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_30",
+      "reward": 0.0
+    },
+    {
+      "task_id": "simple_python_32",
+      "reward": 1.0
+    },
+    {
+      "task_id": "multiple_32",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_4",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_89",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multiple_158",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_multiple_113",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_158",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_92",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_104",
+      "reward": 0.0
+    },
+    {
+      "task_id": "parallel_154",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_142",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_228",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_250",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_281",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_159",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_25",
+      "reward": 1.0
+    },
+    {
+      "task_id": "simple_python_114",
+      "reward": 1.0
+    },
+    {
+      "task_id": "parallel_54",
+      "reward": 0.0
+    }
+  ]
+}

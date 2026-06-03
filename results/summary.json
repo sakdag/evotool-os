@@ -1,0 +1,32 @@
+{
+  "our_scores": {
+    "tau_bench_retail": 6.956521739130435,
+    "tau_bench_airline": 20.0,
+    "bfcl_single": 80.0,
+    "bfcl_multi": 12.0
+  },
+  "paper_numbers": {
+    "tau_bench_retail": {
+      "evotool": 35.9,
+      "react": 33.1,
+      "static": 21.0
+    },
+    "tau_bench_airline": {
+      "evotool": 15.7,
+      "react": 14.4,
+      "static": 21.0
+    },
+    "bfcl_single": {
+      "evotool": 76.9,
+      "react": 70.6,
+      "static": 52.0
+    },
+    "bfcl_multi": {
+      "evotool": 36.4,
+      "react": 33.3,
+      "static": 52.0
+    }
+  },
+  "tau_bench_avg": 13.478260869565217,
+  "bfcl_avg": 46.0
+}

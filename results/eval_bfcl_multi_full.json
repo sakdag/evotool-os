@@ -1,0 +1,214 @@
+{
+  "subset": "multi",
+  "categories": [
+    "multi_turn_base"
+  ],
+  "total_instances": 50,
+  "correct_instances": 0,
+  "accuracy": 0.0,
+  "per_category": {
+    "multi_turn_base": 0.0
+  },
+  "per_instance": [
+    {
+      "task_id": "multi_turn_base_137",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_117",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_11",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_67",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_88",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_91",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_24",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_97",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_182",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_190",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_86",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_181",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_39",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_168",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_87",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_185",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_40",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_1",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_71",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_150",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_114",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_56",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_107",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_191",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_166",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_50",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_143",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_197",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_154",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_129",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_59",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_55",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_23",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_7",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_8",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_108",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_151",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_22",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_139",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_173",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_26",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_188",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_35",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_57",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_62",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_70",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_189",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_6",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_28",
+      "reward": 0.0
+    },
+    {
+      "task_id": "multi_turn_base_163",
+      "reward": 0.0
+    }
+  ]
+}

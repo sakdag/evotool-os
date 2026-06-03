@@ -1,0 +1,49 @@
+{
+  "env_name": "airline",
+  "task_split": "test",
+  "total_tasks": 10,
+  "successful_tasks": 2,
+  "pass_at_1": 20.0,
+  "per_task_rewards": [
+    {
+      "task_id": "airline_test_5",
+      "reward": 0.0
+    },
+    {
+      "task_id": "airline_test_34",
+      "reward": 0.0
+    },
+    {
+      "task_id": "airline_test_6",
+      "reward": 0.0
+    },
+    {
+      "task_id": "airline_test_8",
+      "reward": 0.0
+    },
+    {
+      "task_id": "airline_test_14",
+      "reward": 0.0
+    },
+    {
+      "task_id": "airline_test_15",
+      "reward": 1.0
+    },
+    {
+      "task_id": "airline_test_17",
+      "reward": 1.0
+    },
+    {
+      "task_id": "airline_test_1",
+      "reward": 0.0
+    },
+    {
+      "task_id": "airline_test_7",
+      "reward": 0.0
+    },
+    {
+      "task_id": "airline_test_40",
+      "reward": 0.0
+    }
+  ]
+}

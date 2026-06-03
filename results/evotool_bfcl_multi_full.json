@@ -1,0 +1,17 @@
+{
+  "benchmark": "bfcl_multi",
+  "best_policy": {
+    "planner": "You are a planning agent. Your task is to decompose the user's complex instruction into a sequential list of clear, executable subgoals",
+    "selector": "You are a tool selection agent. Given the current subgoal and the list of available tools, select the most appropriate tool.",
+    "caller": "You are a tool calling agent. Given the selected tool and its documentation, generate the specific arguments required to execute it.",
+    "synthesizer": "You are a synthesis agent. Review the user's original query and the history of tool executions, then synthesize this information to provide the answer."
+  },
+  "generation_logs": [],
+  "final_population": [
+    {
+      "uid": "800051c7",
+      "sel_score": 0.0,
+      "win_frequency": 1.0
+    }
+  ]
+}

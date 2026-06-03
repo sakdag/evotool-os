@@ -1,0 +1,170 @@
+{
+  "benchmark": "bfcl_single",
+  "best_policy": {
+    "planner": "You are a planning agent. Your task is to decompose the user's complex instruction into a sequential list of clear, executable subgoals",
+    "selector": "You are a tool selection agent. Given the current subgoal and the list of available tools, select the most appropriate tool.",
+    "caller": "You are a tool calling agent. Given the selected tool and its documentation, generate the specific arguments required to execute it.",
+    "synthesizer": "You are a synthesis agent. Review the user's original query and the history of tool executions, then synthesize this information to provide the answer."
+  },
+  "generation_logs": [
+    {
+      "generation": 1,
+      "parent_uid": "ba78f413",
+      "blamed_module": "planner",
+      "blame_scores": {
+        "planner": 0.3,
+        "selector": 0.2,
+        "caller": 0.3,
+        "synthesizer": 0.2
+      },
+      "batch_parent_reward": 0.3333333333333333,
+      "batch_child_reward": 0.3333333333333333,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "ba78f413": 0.83
+      },
+      "timestamp": 1778757134.8089495
+    },
+    {
+      "generation": 2,
+      "parent_uid": "ba78f413",
+      "blamed_module": "planner",
+      "blame_scores": {
+        "planner": 0.0,
+        "selector": 0.0,
+        "caller": 0.0,
+        "synthesizer": 0.0
+      },
+      "batch_parent_reward": 1.0,
+      "batch_child_reward": 1.0,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "ba78f413": 0.83
+      },
+      "timestamp": 1778757302.235728
+    },
+    {
+      "generation": 3,
+      "parent_uid": "ba78f413",
+      "blamed_module": "planner",
+      "blame_scores": {
+        "planner": 0.0,
+        "selector": 0.0,
+        "caller": 0.0,
+        "synthesizer": 0.0
+      },
+      "batch_parent_reward": 1.0,
+      "batch_child_reward": 1.0,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "ba78f413": 0.81
+      },
+      "timestamp": 1778757468.589302
+    },
+    {
+      "generation": 4,
+      "parent_uid": "ba78f413",
+      "blamed_module": "planner",
+      "blame_scores": {
+        "planner": 0.0,
+        "selector": 0.0,
+        "caller": 0.0,
+        "synthesizer": 0.0
+      },
+      "batch_parent_reward": 1.0,
+      "batch_child_reward": 0.6666666666666666,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "ba78f413": 0.83
+      },
+      "timestamp": 1778757636.004398
+    },
+    {
+      "generation": 5,
+      "parent_uid": "ba78f413",
+      "blamed_module": "planner",
+      "blame_scores": {
+        "planner": 0.3,
+        "selector": 0.2,
+        "caller": 0.2,
+        "synthesizer": 0.3
+      },
+      "batch_parent_reward": 0.6666666666666666,
+      "batch_child_reward": 0.6666666666666666,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "ba78f413": 0.81
+      },
+      "timestamp": 1778757789.5378616
+    },
+    {
+      "generation": 6,
+      "parent_uid": "ba78f413",
+      "blamed_module": "planner",
+      "blame_scores": {
+        "planner": 0.3,
+        "selector": 0.2,
+        "caller": 0.2,
+        "synthesizer": 0.3
+      },
+      "batch_parent_reward": 0.6666666666666666,
+      "batch_child_reward": 0.3333333333333333,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "ba78f413": 0.83
+      },
+      "timestamp": 1778757944.3117585
+    },
+    {
+      "generation": 7,
+      "parent_uid": "ba78f413",
+      "blamed_module": "synthesizer",
+      "blame_scores": {
+        "planner": 0.0,
+        "selector": 0.0,
+        "caller": 0.0,
+        "synthesizer": 1.0
+      },
+      "batch_parent_reward": 0.6666666666666666,
+      "batch_child_reward": 0.6666666666666666,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "ba78f413": 0.84
+      },
+      "timestamp": 1778758099.4999957
+    },
+    {
+      "generation": 8,
+      "parent_uid": "ba78f413",
+      "blamed_module": "synthesizer",
+      "blame_scores": {
+        "planner": 0.0,
+        "selector": 0.0,
+        "caller": 0.0,
+        "synthesizer": 1.0
+      },
+      "batch_parent_reward": 0.6666666666666666,
+      "batch_child_reward": 0.6666666666666666,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "ba78f413": 0.84
+      },
+      "timestamp": 1778758253.023543
+    }
+  ],
+  "final_population": [
+    {
+      "uid": "ba78f413",
+      "sel_score": 0.84,
+      "win_frequency": 1.0
+    }
+  ]
+}
