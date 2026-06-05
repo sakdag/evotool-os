@@ -1,10 +1,11 @@
 # LLM Configuration
-# Using the AWQ-quantized variant: ~4-5 GiB weights vs ~15 GiB for bfloat16.
-# This fits comfortably on a 16 GiB GPU (RTX 5070 Ti) with KV-cache headroom.
+# Using GPTQ-Int8 quantized variant: ~8-9 GiB weights, significantly better
+# quality than 4-bit AWQ while still fitting on a 16 GiB GPU (RTX 5070 Ti).
+# Fallback: set to "Qwen/Qwen3-8B-AWQ" if GPTQ model is not yet downloaded.
 llm:
-  agent_model: "Qwen/Qwen3-8B-AWQ"
-  blamer_model: "Qwen/Qwen3-8B-AWQ"
-  mutator_model: "Qwen/Qwen3-8B-AWQ"
+  agent_model: "JunHowie/Qwen3-8B-GPTQ-Int8"
+  blamer_model: "JunHowie/Qwen3-8B-GPTQ-Int8"
+  mutator_model: "JunHowie/Qwen3-8B-GPTQ-Int8"
   base_url: "http://localhost:8000/v1"
   api_key: "dummy"
   # Agent modules run without extended thinking (speed + token economy)
@@ -72,7 +73,7 @@ data_splits:
 # τ-Bench Configuration
 tau_bench:
   user_strategy: "llm"
-  user_model: "Qwen/Qwen3-8B-AWQ"
+  user_model: "JunHowie/Qwen3-8B-GPTQ-Int8"
   user_provider: "openai"
   # vLLM server will be used for the user simulator via OPENAI_BASE_URL env var
 

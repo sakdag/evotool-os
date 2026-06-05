@@ -2,8 +2,8 @@
   "env_name": "retail",
   "task_split": "test",
   "total_tasks": 115,
-  "successful_tasks": 8,
-  "pass_at_1": 6.956521739130435,
+  "successful_tasks": 4,
+  "pass_at_1": 3.4782608695652173,
   "per_task_rewards": [
     {
       "task_id": "retail_test_0",
@@ -47,7 +47,7 @@
     },
     {
       "task_id": "retail_test_10",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "retail_test_11",
@@ -107,7 +107,7 @@
     },
     {
       "task_id": "retail_test_25",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "retail_test_26",
@@ -207,7 +207,7 @@
     },
     {
       "task_id": "retail_test_50",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "retail_test_51",
@@ -235,7 +235,7 @@
     },
     {
       "task_id": "retail_test_57",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "retail_test_58",
@@ -267,7 +267,7 @@
     },
     {
       "task_id": "retail_test_65",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "retail_test_66",
@@ -275,11 +275,11 @@
     },
     {
       "task_id": "retail_test_67",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "retail_test_68",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "retail_test_69",
@@ -315,11 +315,11 @@
     },
     {
       "task_id": "retail_test_77",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "retail_test_78",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "retail_test_79",
@@ -431,7 +431,7 @@
     },
     {
       "task_id": "retail_test_106",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "retail_test_107",

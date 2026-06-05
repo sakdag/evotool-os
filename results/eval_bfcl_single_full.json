@@ -7,13 +7,13 @@
     "parallel_multiple"
   ],
   "total_instances": 700,
-  "correct_instances": 560,
-  "accuracy": 80.0,
+  "correct_instances": 568,
+  "accuracy": 81.14285714285714,
   "per_category": {
-    "simple_python": 77.3851590106007,
-    "multiple": 71.21212121212122,
-    "parallel": 86.95652173913044,
-    "parallel_multiple": 86.39455782312925
+    "simple_python": 79.15194346289752,
+    "multiple": 70.45454545454545,
+    "parallel": 88.40579710144928,
+    "parallel_multiple": 87.75510204081633
   },
   "per_instance": [
     {
@@ -26,7 +26,7 @@
     },
     {
       "task_id": "multiple_4",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "simple_python_277",
@@ -42,11 +42,11 @@
     },
     {
       "task_id": "simple_python_372",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "parallel_122",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "multiple_0",
@@ -66,7 +66,7 @@
     },
     {
       "task_id": "multiple_148",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "parallel_110",
@@ -90,7 +90,7 @@
     },
     {
       "task_id": "simple_python_139",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_385",
@@ -182,7 +182,7 @@
     },
     {
       "task_id": "simple_python_162",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_304",
@@ -270,7 +270,7 @@
     },
     {
       "task_id": "simple_python_124",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "multiple_91",
@@ -426,7 +426,7 @@
     },
     {
       "task_id": "multiple_3",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_226",
@@ -598,7 +598,7 @@
     },
     {
       "task_id": "multiple_124",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "parallel_multiple_93",
@@ -690,7 +690,7 @@
     },
     {
       "task_id": "simple_python_261",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "simple_python_310",
@@ -738,7 +738,7 @@
     },
     {
       "task_id": "simple_python_297",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_91",
@@ -790,7 +790,7 @@
     },
     {
       "task_id": "simple_python_328",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_179",
@@ -818,7 +818,7 @@
     },
     {
       "task_id": "parallel_multiple_127",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "parallel_59",
@@ -858,7 +858,7 @@
     },
     {
       "task_id": "parallel_multiple_15",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_312",
@@ -918,7 +918,7 @@
     },
     {
       "task_id": "simple_python_183",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "parallel_multiple_197",
@@ -930,7 +930,7 @@
     },
     {
       "task_id": "simple_python_181",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "parallel_multiple_104",
@@ -954,7 +954,7 @@
     },
     {
       "task_id": "simple_python_105",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "parallel_multiple_119",
@@ -1070,7 +1070,7 @@
     },
     {
       "task_id": "parallel_multiple_21",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "parallel_179",
@@ -1142,7 +1142,7 @@
     },
     {
       "task_id": "simple_python_8",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "parallel_multiple_22",
@@ -1222,11 +1222,11 @@
     },
     {
       "task_id": "simple_python_9",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_74",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "parallel_multiple_151",
@@ -1262,11 +1262,11 @@
     },
     {
       "task_id": "simple_python_209",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "simple_python_267",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "parallel_multiple_70",
@@ -1294,11 +1294,11 @@
     },
     {
       "task_id": "simple_python_40",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "parallel_8",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "multiple_192",
@@ -1322,7 +1322,7 @@
     },
     {
       "task_id": "simple_python_240",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "parallel_123",
@@ -1402,7 +1402,7 @@
     },
     {
       "task_id": "simple_python_222",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_303",
@@ -1414,7 +1414,7 @@
     },
     {
       "task_id": "simple_python_158",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "multiple_98",
@@ -1542,7 +1542,7 @@
     },
     {
       "task_id": "parallel_multiple_29",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "simple_python_143",
@@ -1610,7 +1610,7 @@
     },
     {
       "task_id": "multiple_20",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "parallel_155",
@@ -1674,7 +1674,7 @@
     },
     {
       "task_id": "simple_python_219",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "parallel_167",
@@ -1694,7 +1694,7 @@
     },
     {
       "task_id": "multiple_126",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "parallel_128",
@@ -1726,7 +1726,7 @@
     },
     {
       "task_id": "parallel_124",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "simple_python_72",
@@ -1742,7 +1742,7 @@
     },
     {
       "task_id": "parallel_134",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_235",
@@ -1766,7 +1766,7 @@
     },
     {
       "task_id": "parallel_multiple_27",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_230",
@@ -1810,7 +1810,7 @@
     },
     {
       "task_id": "simple_python_319",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "parallel_130",
@@ -1826,7 +1826,7 @@
     },
     {
       "task_id": "parallel_multiple_138",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "parallel_184",
@@ -1906,7 +1906,7 @@
     },
     {
       "task_id": "simple_python_246",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "simple_python_59",
@@ -1918,7 +1918,7 @@
     },
     {
       "task_id": "simple_python_314",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "simple_python_371",
@@ -2174,11 +2174,11 @@
     },
     {
       "task_id": "multiple_105",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "multiple_121",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "simple_python_141",
@@ -2270,7 +2270,7 @@
     },
     {
       "task_id": "simple_python_322",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "parallel_135",
@@ -2318,7 +2318,7 @@
     },
     {
       "task_id": "simple_python_57",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "parallel_194",
@@ -2338,7 +2338,7 @@
     },
     {
       "task_id": "parallel_101",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_224",
@@ -2346,7 +2346,7 @@
     },
     {
       "task_id": "multiple_170",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "parallel_104",
@@ -2398,7 +2398,7 @@
     },
     {
       "task_id": "simple_python_73",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "parallel_63",
@@ -2518,7 +2518,7 @@
     },
     {
       "task_id": "simple_python_370",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "parallel_multiple_82",
@@ -2562,7 +2562,7 @@
     },
     {
       "task_id": "multiple_149",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "multiple_70",
@@ -2674,7 +2674,7 @@
     },
     {
       "task_id": "simple_python_284",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "parallel_3",
@@ -2682,7 +2682,7 @@
     },
     {
       "task_id": "multiple_59",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_225",
@@ -2742,7 +2742,7 @@
     },
     {
       "task_id": "simple_python_30",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "simple_python_32",
@@ -2814,7 +2814,7 @@
     },
     {
       "task_id": "parallel_54",
-      "reward": 0.0
+      "reward": 1.0
     }
   ]
 }

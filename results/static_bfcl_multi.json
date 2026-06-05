@@ -4,15 +4,15 @@
     "multi_turn_base"
   ],
   "total_instances": 50,
-  "correct_instances": 6,
-  "accuracy": 12.0,
+  "correct_instances": 2,
+  "accuracy": 4.0,
   "per_category": {
-    "multi_turn_base": 12.0
+    "multi_turn_base": 4.0
   },
   "per_instance": [
     {
       "task_id": "multi_turn_base_137",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "multi_turn_base_117",
@@ -32,7 +32,7 @@
     },
     {
       "task_id": "multi_turn_base_91",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "multi_turn_base_24",
@@ -44,7 +44,7 @@
     },
     {
       "task_id": "multi_turn_base_182",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "multi_turn_base_190",
@@ -92,7 +92,7 @@
     },
     {
       "task_id": "multi_turn_base_114",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "multi_turn_base_56",
@@ -100,7 +100,7 @@
     },
     {
       "task_id": "multi_turn_base_107",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "multi_turn_base_191",
@@ -164,7 +164,7 @@
     },
     {
       "task_id": "multi_turn_base_139",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "multi_turn_base_173",

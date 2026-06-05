@@ -2,8 +2,8 @@
   "env_name": "airline",
   "task_split": "test",
   "total_tasks": 10,
-  "successful_tasks": 2,
-  "pass_at_1": 20.0,
+  "successful_tasks": 3,
+  "pass_at_1": 30.0,
   "per_task_rewards": [
     {
       "task_id": "airline_test_5",
@@ -11,7 +11,7 @@
     },
     {
       "task_id": "airline_test_34",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "airline_test_6",
@@ -31,7 +31,7 @@
     },
     {
       "task_id": "airline_test_17",
-      "reward": 1.0
+      "reward": 0.0
     },
     {
       "task_id": "airline_test_1",
@@ -43,7 +43,7 @@
     },
     {
       "task_id": "airline_test_40",
-      "reward": 0.0
+      "reward": 1.0
     }
   ]
 }

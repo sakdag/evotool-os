@@ -4,10 +4,10 @@
     "multi_turn_base"
   ],
   "total_instances": 50,
-  "correct_instances": 0,
-  "accuracy": 0.0,
+  "correct_instances": 1,
+  "accuracy": 2.0,
   "per_category": {
-    "multi_turn_base": 0.0
+    "multi_turn_base": 2.0
   },
   "per_instance": [
     {
@@ -112,7 +112,7 @@
     },
     {
       "task_id": "multi_turn_base_50",
-      "reward": 0.0
+      "reward": 1.0
     },
     {
       "task_id": "multi_turn_base_143",

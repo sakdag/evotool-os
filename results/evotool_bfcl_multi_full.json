@@ -6,10 +6,163 @@
     "caller": "You are a tool calling agent. Given the selected tool and its documentation, generate the specific arguments required to execute it.",
     "synthesizer": "You are a synthesis agent. Review the user's original query and the history of tool executions, then synthesize this information to provide the answer."
   },
-  "generation_logs": [],
+  "generation_logs": [
+    {
+      "generation": 1,
+      "parent_uid": "79ec80fe",
+      "blamed_module": "caller",
+      "blame_scores": {
+        "planner": 0.0,
+        "selector": 0.0,
+        "caller": 1.0,
+        "synthesizer": 0.0
+      },
+      "batch_parent_reward": 0.0,
+      "batch_child_reward": 0.0,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "79ec80fe": 0.0
+      },
+      "timestamp": 1780626412.2742076
+    },
+    {
+      "generation": 2,
+      "parent_uid": "79ec80fe",
+      "blamed_module": "selector",
+      "blame_scores": {
+        "planner": 0.0,
+        "selector": 1.0,
+        "caller": 0.0,
+        "synthesizer": 0.0
+      },
+      "batch_parent_reward": 0.0,
+      "batch_child_reward": 0.0,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "79ec80fe": 0.0
+      },
+      "timestamp": 1780627089.6767025
+    },
+    {
+      "generation": 3,
+      "parent_uid": "79ec80fe",
+      "blamed_module": "selector",
+      "blame_scores": {
+        "planner": 0.0,
+        "selector": 1.0,
+        "caller": 0.0,
+        "synthesizer": 0.0
+      },
+      "batch_parent_reward": 0.0,
+      "batch_child_reward": 0.0,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "79ec80fe": 0.0
+      },
+      "timestamp": 1780627758.4362156
+    },
+    {
+      "generation": 4,
+      "parent_uid": "79ec80fe",
+      "blamed_module": "synthesizer",
+      "blame_scores": {
+        "planner": 0.0,
+        "selector": 0.0,
+        "caller": 0.0,
+        "synthesizer": 1.0
+      },
+      "batch_parent_reward": 0.0,
+      "batch_child_reward": 0.0,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "79ec80fe": 0.0
+      },
+      "timestamp": 1780628453.6257403
+    },
+    {
+      "generation": 5,
+      "parent_uid": "79ec80fe",
+      "blamed_module": "selector",
+      "blame_scores": {
+        "planner": 0.3,
+        "selector": 0.5,
+        "caller": 0.1,
+        "synthesizer": 0.1
+      },
+      "batch_parent_reward": 0.0,
+      "batch_child_reward": 0.0,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "79ec80fe": 0.0
+      },
+      "timestamp": 1780629138.912943
+    },
+    {
+      "generation": 6,
+      "parent_uid": "79ec80fe",
+      "blamed_module": "selector",
+      "blame_scores": {
+        "planner": 0.3,
+        "selector": 0.5,
+        "caller": 0.1,
+        "synthesizer": 0.1
+      },
+      "batch_parent_reward": 0.0,
+      "batch_child_reward": 0.0,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "79ec80fe": 0.0
+      },
+      "timestamp": 1780629824.9521327
+    },
+    {
+      "generation": 7,
+      "parent_uid": "79ec80fe",
+      "blamed_module": "selector",
+      "blame_scores": {
+        "planner": 0.0,
+        "selector": 1.0,
+        "caller": 0.0,
+        "synthesizer": 0.0
+      },
+      "batch_parent_reward": 0.0,
+      "batch_child_reward": 0.0,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "79ec80fe": 0.0
+      },
+      "timestamp": 1780630438.458723
+    },
+    {
+      "generation": 8,
+      "parent_uid": "79ec80fe",
+      "blamed_module": "selector",
+      "blame_scores": {
+        "planner": 0.2,
+        "selector": 0.6,
+        "caller": 0.1,
+        "synthesizer": 0.1
+      },
+      "batch_parent_reward": 0.0,
+      "batch_child_reward": 0.0,
+      "child_accepted": false,
+      "population_size": 1,
+      "sel_scores": {
+        "79ec80fe": 0.0
+      },
+      "timestamp": 1780631133.5461571
+    }
+  ],
   "final_population": [
     {
-      "uid": "800051c7",
+      "uid": "79ec80fe",
       "sel_score": 0.0,
       "win_frequency": 1.0
     }
